@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ClientFlow CRM</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div id="app">
+
+    
+
+    <!-- ================================
+         LOGIN SCREEN
+    ================================= -->
+
+    <section class="login-page" id="loginPage">
+
+        <div class="login-container">
+
+            <div class="brand">
+                <div class="brand-logo">C</div>
+
+                <div>
+                    <h1>ClientFlow</h1>
+                    <p>Lead Management System</p>
+                </div>
+            </div>
+
+            <div class="login-card">
+
+                <div class="login-heading">
+                    <h2>Welcome back</h2>
+                    <p>Sign in to manage your leads and clients.</p>
+                </div>
+
+                <form id="loginForm">
+
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="admin@crm.com"
+                            autocomplete="email"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+                    </div>
+
+                    <button type="submit" class="login-button">
+                        Sign in
+                    </button>
+
+                    <p id="loginMessage" class="login-message"></p>
+
+                </form>
+
+            </div>
+
+            <p class="login-footer">
+                Secure admin access • ClientFlow CRM
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================================
+         CRM DASHBOARD
+    ================================= -->
+
+    <section class="dashboard-page" id="dashboardPage">
+
+        <!-- Sidebar -->
+
+        <aside class="sidebar">
+
+            <div class="sidebar-brand">
+
+                <div class="brand-logo">C</div>
+
+                <div>
+                    <h2>ClientFlow</h2>
+                    <span>CRM</span>
+                </div>
+
+            </div>
+
+
+            <nav class="sidebar-nav">
+
+                <p class="nav-label">MAIN</p>
+
+                <button class="nav-item active">
+                    <span>▦</span>
+                    Dashboard
+                </button>
+
+                <button class="nav-item">
+                    <span>◫</span>
+                    Leads
+                </button>
+
+                <button class="nav-item">
+                    <span>◔</span>
+                    Analytics
+                </button>
+
+
+                <p class="nav-label">SYSTEM</p>
+
+                <button class="nav-item">
+                    <span>⚙</span>
+                    Settings
+                </button>
+
+            </nav>
+
+
+            <div class="sidebar-bottom">
+
+                <button class="logout-button" id="logoutButton">
+                    <span>↪</span>
+                    Logout
+                </button>
+
+            </div>
+
+        </aside>
+
+
+        <!-- Main Content -->
+
+        <main class="dashboard-main">
+
+            <!-- Top Header -->
+
+            <header class="dashboard-header">
+
+                <div class="header-title">
+
+                    <p class="eyebrow">OVERVIEW</p>
+
+                    <h1>Dashboard</h1>
+
+                    <p>
+                        Here's what's happening with your leads today.
+                    </p>
+
+                </div>
+
+
+                <div class="header-actions">
+
+                    <button class="icon-button" title="Notifications">
+                        ♧
+                    </button>
+
+                    <div class="admin-profile">
+
+                        <div class="admin-avatar">
+                            A
+                        </div>
+
+                        <div class="admin-info">
+                            <strong id="adminName">Admin</strong>
+                            <span>Administrator</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- Metrics -->
+
+            <section class="metrics-grid">
+
+                <div class="metric-card">
+
+                    <div class="metric-top">
+                        <span>Total Leads</span>
+
+                        <div class="metric-icon">
+                            ◫
+                        </div>
+                    </div>
+
+                    <h2 id="totalLeads">0</h2>
+
+                    <p class="metric-description">
+                        All leads in your CRM
+                    </p>
+
+                </div>
+
+
+                <div class="metric-card">
+
+                    <div class="metric-top">
+                        <span>New Leads</span>
+
+                        <div class="metric-icon">
+                            +
+                        </div>
+                    </div>
+
+                    <h2 id="newLeads">0</h2>
+
+                    <p class="metric-description">
+                        Waiting for follow-up
+                    </p>
+
+                </div>
+
+
+                <div class="metric-card">
+
+                    <div class="metric-top">
+                        <span>Contacted</span>
+
+                        <div class="metric-icon">
+                            ↗
+                        </div>
+                    </div>
+
+                    <h2 id="contactedLeads">0</h2>
+
+                    <p class="metric-description">
+                        Leads currently in progress
+                    </p>
+
+                </div>
+
+
+                <div class="metric-card">
+
+                    <div class="metric-top">
+                        <span>Converted</span>
+
+                        <div class="metric-icon">
+                            ✓
+                        </div>
+                    </div>
+
+                    <h2 id="convertedLeads">0</h2>
+
+                    <p class="metric-description">
+                        Successfully converted
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- Leads Section -->
+
+            <section class="leads-section">
+
+                <div class="section-header">
+
+                    <div>
+                        <h2>Recent Leads</h2>
+
+                        <p>
+                            Manage and track your latest client enquiries.
+                        </p>
+                    </div>
+
+
+                    <button class="primary-action">
+                        + Add Lead
+                    </button>
+
+                </div>
+
+
+                <!-- Search and Filters -->
+
+                <div class="lead-toolbar">
+
+                    <div class="search-box">
+
+                        <span>⌕</span>
+
+                        <input
+                            type="text"
+                            id="searchInput"
+                            placeholder="Search leads..."
+                        >
+
+                    </div>
+
+
+                    <select id="statusFilter">
+
+                        <option value="all">
+                            All statuses
+                        </option>
+
+                        <option value="new">
+                            New
+                        </option>
+
+                        <option value="contacted">
+                            Contacted
+                        </option>
+
+                        <option value="converted">
+                            Converted
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Leads Table -->
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Lead</th>
+
+                                <th>Company</th>
+
+                                <th>Source</th>
+
+                                <th>Status</th>
+
+                                <th>Created</th>
+
+                                <th></th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="leadsTableBody">
+
+                            <tr>
+
+                                <td colspan="6" class="empty-state">
+
+                                    <div>
+                                        No leads to display
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </section>
+
+</div>
+<!-- LEAD DETAILS MODAL -->
+
+<div class="lead-modal" id="leadModal">
+
+    <div class="lead-modal-overlay" id="leadModalOverlay"></div>
+
+    <div class="lead-modal-card">
+
+        <div class="lead-modal-header">
+
+            <div>
+                <p class="modal-eyebrow">LEAD DETAILS</p>
+                <h2 id="modalLeadName">Lead Name</h2>
+            </div>
+
+            <button
+                class="modal-close"
+                id="closeLeadModal"
+                type="button"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="lead-modal-body">
+
+            <div class="lead-detail-grid">
+
+                <div class="detail-item">
+                    <span>Email</span>
+                    <strong id="modalLeadEmail">
+                        —
+                    </strong>
+                </div>
+
+                <div class="detail-item">
+                    <span>Phone</span>
+                    <strong id="modalLeadPhone">
+                        —
+                    </strong>
+                </div>
+
+                <div class="detail-item">
+                    <span>Company</span>
+                    <strong id="modalLeadCompany">
+                        —
+                    </strong>
+                </div>
+
+                <div class="detail-item">
+                    <span>Source</span>
+                    <strong id="modalLeadSource">
+                        —
+                    </strong>
+                </div>
+
+            </div>
+
+
+           <div class="detail-status-section">
+
+    <span>Status</span>
+
+    <select id="modalLeadStatus" class="modal-status-select">
+
+        <option value="new">
+            New
+        </option>
+
+        <option value="contacted">
+            Contacted
+        </option>
+
+        <option value="converted">
+            Converted
+        </option>
+
+    </select>
+
+</div>
+<!-- FOLLOW-UP NOTES -->
+
+<div class="lead-notes-section">
+
+    <div class="notes-heading">
+
+        <div>
+            <span class="notes-eyebrow">FOLLOW-UP</span>
+            <h3>Notes & Activity</h3>
+        </div>
+
+    </div>
+
+
+    <div class="add-note-box">
+
+        <textarea
+            id="noteInput"
+            placeholder="Add a follow-up note..."
+            rows="3"
+        ></textarea>
+
+        <div class="note-action-row">
+
+            <span class="note-hint">
+                Keep track of calls, meetings and follow-ups.
+            </span>
+
+            <button
+                type="button"
+                id="addNoteButton"
+                class="add-note-button"
+            >
+                Add Note
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="notesList"
+        class="notes-list"
+    >
+
+        <div class="notes-empty">
+            No follow-up notes yet.
+        </div>
+
+    </div>
+
+</div>
+
+        </div>
+
+    </div>
+
+</div>
+                
+
+
+                
+            
+
+        </section>
+
+    </div>
+
+        
+
+                        
+    <script src="script.js"></script>
+
+</body>
+</html>

@@ -115,24 +115,22 @@
                     Dashboard
                 </button>
 
-                <button class="nav-item">
-                    <span>◫</span>
-                    Leads
-                </button>
-
-                <button class="nav-item">
-                    <span>◔</span>
-                    Analytics
-                </button>
+               <button id="leadsNavButton" class="nav-item">
+    <span>◫</span>
+    Leads
+</button>
+               <button id="analyticsNavButton" class="nav-item">
+    <span>◷</span>
+    Analytics
+</button>
 
 
                 <p class="nav-label">SYSTEM</p>
 
-                <button class="nav-item">
-                    <span>⚙</span>
-                    Settings
-                </button>
-
+                <button id="settingsNavButton" class="nav-item">
+    <span>⚙</span>
+    Settings
+</button>
             </nav>
 
 
@@ -290,9 +288,9 @@
                     </div>
 
 
-                    <button class="primary-action">
-                        + Add Lead
-                    </button>
+                    <button id="addLeadButton" class="primary-action">
+                   + Add Lead
+                       </button>
 
                 </div>
 
@@ -385,7 +383,191 @@
                 </div>
 
             </section>
+<!-- ANALYTICS SECTION -->
+<section class="analytics-section" id="analyticsSection">
 
+    <div class="section-heading">
+        <div>
+            <p class="modal-eyebrow">INSIGHTS</p>
+            <h2>Analytics</h2>
+            <p>Understand your lead pipeline and conversion activity.</p>
+        </div>
+    </div>
+
+    <div class="analytics-grid">
+
+        <div class="analytics-card">
+            <span>Total Leads</span>
+            <strong id="analyticsTotalLeads">0</strong>
+        </div>
+
+        <div class="analytics-card">
+            <span>New Leads</span>
+            <strong id="analyticsNewLeads">0</strong>
+        </div>
+
+        <div class="analytics-card">
+            <span>Contacted</span>
+            <strong id="analyticsContactedLeads">0</strong>
+        </div>
+
+        <div class="analytics-card">
+            <span>Converted</span>
+            <strong id="analyticsConvertedLeads">0</strong>
+        </div>
+
+    </div>
+
+    <div class="analytics-panels">
+
+        <div class="analytics-panel">
+
+            <div class="analytics-panel-header">
+                <div>
+                    <h3>Lead Status</h3>
+                    <span>Pipeline breakdown</span>
+                </div>
+            </div>
+
+            <div class="status-bars">
+
+                <div class="status-row">
+                    <div>
+                        <span>New</span>
+                        <strong id="analyticsNewPercent">0%</strong>
+                    </div>
+
+                    <div class="status-bar">
+                        <div id="analyticsNewBar"></div>
+                    </div>
+                </div>
+
+                <div class="status-row">
+                    <div>
+                        <span>Contacted</span>
+                        <strong id="analyticsContactedPercent">0%</strong>
+                    </div>
+
+                    <div class="status-bar">
+                        <div id="analyticsContactedBar"></div>
+                    </div>
+                </div>
+
+                <div class="status-row">
+                    <div>
+                        <span>Converted</span>
+                        <strong id="analyticsConvertedPercent">0%</strong>
+                    </div>
+
+                    <div class="status-bar">
+                        <div id="analyticsConvertedBar"></div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="analytics-panel">
+
+            <div class="analytics-panel-header">
+                <div>
+                    <h3>Conversion Overview</h3>
+                    <span>Lead performance</span>
+                </div>
+            </div>
+
+            <div class="conversion-number">
+                <strong id="analyticsConversionRate">0%</strong>
+                <span>Conversion Rate</span>
+            </div>
+
+            <p class="analytics-description">
+                Percentage of leads that have successfully converted.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- SETTINGS SECTION -->
+<section class="settings-section" id="settingsSection">
+
+    <div class="section-heading">
+        <div>
+            <p class="modal-eyebrow">WORKSPACE</p>
+            <h2>Settings</h2>
+            <p>Manage your ClientFlow workspace and account.</p>
+        </div>
+    </div>
+
+    <div class="settings-grid">
+
+        <!-- Admin Profile -->
+        <div class="settings-card">
+
+            <div class="settings-card-header">
+                <div>
+                    <span class="settings-label">ADMIN PROFILE</span>
+                    <h3>Account Information</h3>
+                </div>
+            </div>
+
+            <div class="settings-field">
+                <span>Name</span>
+                <strong id="settingsAdminName">CRM Admin</strong>
+            </div>
+
+            <div class="settings-field">
+                <span>Email</span>
+                <strong id="settingsAdminEmail">admin@crm.com</strong>
+            </div>
+
+            <div class="settings-field">
+                <span>Role</span>
+                <strong>Administrator</strong>
+            </div>
+            <div class="settings-actions">
+    <button id="settingsLogoutButton" class="settings-logout-button">
+        Log Out
+    </button>
+</div>
+
+        </div>
+
+
+        <!-- Workspace -->
+        <div class="settings-card">
+
+            <div class="settings-card-header">
+                <div>
+                    <span class="settings-label">WORKSPACE</span>
+                    <h3>ClientFlow CRM</h3>
+                </div>
+            </div>
+
+            <div class="settings-field">
+                <span>Lead Management</span>
+                <strong>Active</strong>
+            </div>
+
+            <div class="settings-field">
+                <span>Database</span>
+                <strong>Connected</strong>
+            </div>
+
+            <div class="settings-field">
+                <span>Authentication</span>
+                <strong>JWT Protected</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
         </main>
 
     </section>
@@ -532,7 +714,116 @@
     </div>
 
 </div>
-                
+  <!-- ADD LEAD MODAL -->
+<div class="lead-modal" id="addLeadModal">
+
+    <div class="lead-modal-overlay" id="addLeadModalOverlay"></div>
+
+    <div class="lead-modal-card">
+
+        <div class="lead-modal-header">
+            <div>
+                <p class="modal-eyebrow">NEW LEAD</p>
+                <h2>Add Lead</h2>
+            </div>
+
+            <button
+                class="modal-close"
+                id="closeAddLeadModal"
+                type="button"
+            >
+                ×
+            </button>
+        </div>
+
+        <div class="lead-modal-body">
+
+            <form id="addLeadForm">
+
+                <div class="lead-detail-grid">
+
+                    <div class="detail-item">
+                        <span>Name</span>
+                        <input
+                            type="text"
+                            id="addLeadName"
+                            placeholder="Enter lead name"
+                            required
+                        >
+                    </div>
+
+                    <div class="detail-item">
+                        <span>Email</span>
+                        <input
+                            type="email"
+                            id="addLeadEmail"
+                            placeholder="Enter email address"
+                            required
+                        >
+                    </div>
+
+                    <div class="detail-item">
+                        <span>Phone</span>
+                        <input
+                            type="text"
+                            id="addLeadPhone"
+                            placeholder="Enter phone number"
+                        >
+                    </div>
+
+                    <div class="detail-item">
+                        <span>Company</span>
+                        <input
+                            type="text"
+                            id="addLeadCompany"
+                            placeholder="Enter company"
+                        >
+                    </div>
+
+                    <div class="detail-item">
+                        <span>Source</span>
+                        <select id="addLeadSource">
+                            <option value="Website">Website</option>
+                            <option value="LinkedIn">LinkedIn</option>
+                            <option value="Referral">Referral</option>
+                            <option value="Google">Google</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="detail-item">
+                        <span>Status</span>
+                        <select id="addLeadStatus">
+                            <option value="new">New</option>
+                            <option value="contacted">Contacted</option>
+                            <option value="converted">Converted</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="note-action-row">
+
+                    <span class="note-hint">
+                        Add a new client lead to your CRM.
+                    </span>
+
+                    <button
+                        type="submit"
+                        class="add-note-button"
+                    >
+                        Create Lead
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>              
 
 
                 

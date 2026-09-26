@@ -225,6 +225,7 @@ allLeads = leads;
 
         displayLeads(leads);
         updateMetrics(leads);
+        updateAnalytics(leads);
 
 
     } catch (error) {
@@ -700,4 +701,267 @@ document
         })
         .join("");
 }
+// ===============================
+// ADD LEAD MODAL
+// ===============================
+
+const addLeadButton = document.getElementById("addLeadButton");
+const addLeadModal = document.getElementById("addLeadModal");
+const closeAddLeadModal = document.getElementById("closeAddLeadModal");
+const addLeadModalOverlay = document.getElementById("addLeadModalOverlay");
+const addLeadForm = document.getElementById("addLeadForm");
+
+// Open Add Lead modal
+addLeadButton.addEventListener("click", () => {
+    addLeadModal.classList.add("show");
+});
+
+// Close Add Lead modal
+closeAddLeadModal.addEventListener("click", () => {
+    addLeadModal.classList.remove("show");
+});
+
+// Close when clicking outside the modal
+addLeadModalOverlay.addEventListener("click", () => {
+    addLeadModal.classList.remove("show");
+});
+
+// Create new lead
+addLeadForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const token = localStorage.getItem("crmToken");
+
+    if (!token) {
+        alert("Please login again.");
+        return;
+    }
+
+    const leadData = {
+        name: document.getElementById("addLeadName").value.trim(),
+        email: document.getElementById("addLeadEmail").value.trim(),
+        phone: document.getElementById("addLeadPhone").value.trim(),
+        company: document.getElementById("addLeadCompany").value.trim(),
+        source: document.getElementById("addLeadSource").value,
+        status: document.getElementById("addLeadStatus").value
+    };
+
+    try {
+        const response = await fetch("http://localhost:5000/api/leads", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify(leadData)
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                data.error || data.message || "Failed to create lead"
+            );
+        }
+
+        alert("Lead created successfully!");
+
+        addLeadForm.reset();
+        addLeadModal.classList.remove("show");
+
+        await loadLeads();
+
+    } catch (error) {
+        alert("Failed to create lead: " + error.message);
+    }
+});
+// =========================================
+// SIDEBAR - LEADS
+// =========================================
+
+const leadsNavButton = document.getElementById("leadsNavButton");
+
+leadsNavButton.addEventListener("click", () => {
+
+    const leadsTableBody = document.getElementById("leadsTableBody");
+
+    if (leadsTableBody) {
+        leadsTableBody.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+    }
+
+});
+// =========================================
+// SIDEBAR - ANALYTICS
+// =========================================
+
+// =========================================
+// SIDEBAR - ANALYTICS
+// =========================================
+
+const analyticsNavButton = document.getElementById("analyticsNavButton");
+
+analyticsNavButton.addEventListener("click", () => {
+
+    const analyticsSection = document.getElementById("analyticsSection");
+
+    if (analyticsSection) {
+        analyticsSection.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    }
+
+});
+// =========================================
+// ANALYTICS - UPDATE DATA
+// =========================================
+
+function updateAnalytics(leads) {
+
+    const total = leads.length;
+
+    const newLeads = leads.filter(
+        lead => lead.status === "new"
+    ).length;
+
+    const contactedLeads = leads.filter(
+        lead => lead.status === "contacted"
+    ).length;
+
+    const convertedLeads = leads.filter(
+        lead => lead.status === "converted"
+    ).length;
+
+
+    // Numbers
+
+    document.getElementById("analyticsTotalLeads").textContent = total;
+
+    document.getElementById("analyticsNewLeads").textContent = newLeads;
+
+    document.getElementById("analyticsContactedLeads").textContent = contactedLeads;
+
+    document.getElementById("analyticsConvertedLeads").textContent = convertedLeads;
+
+
+    // Percentages
+
+    const newPercent = total
+        ? Math.round((newLeads / total) * 100)
+        : 0;
+
+    const contactedPercent = total
+        ? Math.round((contactedLeads / total) * 100)
+        : 0;
+
+    const convertedPercent = total
+        ? Math.round((convertedLeads / total) * 100)
+        : 0;
+
+
+    document.getElementById("analyticsNewPercent").textContent =
+        `${newPercent}%`;
+
+    document.getElementById("analyticsContactedPercent").textContent =
+        `${contactedPercent}%`;
+
+    document.getElementById("analyticsConvertedPercent").textContent =
+        `${convertedPercent}%`;
+
+
+    // Progress bars
+
+    document.getElementById("analyticsNewBar").style.width =
+        `${newPercent}%`;
+
+    document.getElementById("analyticsContactedBar").style.width =
+        `${contactedPercent}%`;
+
+    document.getElementById("analyticsConvertedBar").style.width =
+        `${convertedPercent}%`;
+
+
+    // Conversion rate
+
+    const conversionRate = total
+        ? ((convertedLeads / total) * 100).toFixed(1)
+        : "0.0";
+
+    document.getElementById("analyticsConversionRate").textContent =
+        `${conversionRate}%`;
+}
+// =========================================
+// SIDEBAR - SETTINGS
+// =========================================
+
+const settingsNavButton = document.getElementById("settingsNavButton");
+
+settingsNavButton.addEventListener("click", () => {
+
+    const settingsSection = document.getElementById("settingsSection");
+
+    if (settingsSection) {
+        settingsSection.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    }
+
+});
+// =========================================
+// SETTINGS - LOGOUT
+// =========================================
+
+const settingsLogoutButton = document.getElementById("settingsLogoutButton");
+
+settingsLogoutButton.addEventListener("click", () => {
+
+    localStorage.removeItem("crmToken");
+    localStorage.removeItem("crmAdmin");
+
+    dashboardPage.style.display = "none";
+    loginPage.style.display = "flex";
+
+});
+// =========================================
+// SETTINGS - ADMIN INFORMATION
+// =========================================
+
+function loadAdminSettings() {
+
+    const adminData = localStorage.getItem("crmAdmin");
+
+    if (!adminData) {
+        return;
+    }
+
+    try {
+
+        const admin = JSON.parse(adminData);
+
+        const nameElement = document.getElementById("settingsAdminName");
+        const emailElement = document.getElementById("settingsAdminEmail");
+
+        if (nameElement && admin.name) {
+            nameElement.textContent = admin.name;
+        }
+
+        if (emailElement && admin.email) {
+            emailElement.textContent = admin.email;
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Failed to load admin information:",
+            error
+        );
+
+    }
+}
+
+loadAdminSettings();
    

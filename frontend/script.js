@@ -28,7 +28,7 @@ loginForm.addEventListener("submit", async (event) => {
     try {
 
         const response = await fetch(
-            "http://localhost:5000/api/auth/login",
+            "https://future-fs-02-lxze.onrender.com/api/auth/login",
             {
                 method: "POST",
 
@@ -190,7 +190,7 @@ async function loadLeads() {
     try {
 
         const response = await fetch(
-            "http://localhost:5000/api/leads",
+            "https://future-fs-02-lxze.onrender.com/api/leads",
             {
                 method: "GET",
 
@@ -446,7 +446,7 @@ document
         try {
 
             const response = await fetch(
-                `http://localhost:5000/api/leads/${lead._id}`,
+                `https://future-fs-02-lxze.onrender.com/api/leads/${lead._id}`,
                 {
                     method: "PUT",
 
@@ -607,7 +607,7 @@ document
         try {
 
             const response = await fetch(
-                `http://localhost:5000/api/leads/${selectedLeadId}/notes`,
+                `https://future-fs-02-lxze.onrender.com/api/leads/${selectedLeadId}/notes`,
                 {
                     method: "POST",
 
@@ -747,7 +747,7 @@ addLeadForm.addEventListener("submit", async (event) => {
     };
 
     try {
-        const response = await fetch("http://localhost:5000/api/leads", {
+        const response = await fetch("https://future-fs-02-lxze.onrender.com/api/leads", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
